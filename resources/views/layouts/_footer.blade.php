@@ -1,0 +1,1 @@
+<p><span>copyright @2018 {{ $user->name }}</span>　　<a onclick="donation()" class="layui-btn layui-btn-danger layui-btn-sm">捐赠作者</a></p>
