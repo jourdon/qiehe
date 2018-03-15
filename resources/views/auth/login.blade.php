@@ -1,41 +1,69 @@
-<!DOCTYPE html>
-<html class="loginHtml">
-<head>
-    <meta charset="utf-8">
-    <title>登录--layui后台管理模板 2.0</title>
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" href="{{ asset('favicon.ico') }}">
-    <link rel="stylesheet" href="{{ asset('layui/css/layui.css') }}" media="all" />
-    <link rel="stylesheet" href="{{ asset('css/public.css') }}" media="all" />
-</head>
-<body class="loginBody">
-<form class="layui-form" method="post" action="{{ url('login') }}">
-    {{csrf_field()}}
-    <div class="layui-form-item input-item">
-        <label for="userName">用户名</label>
-        <input type="text" name="username" placeholder="请输入用户名" autocomplete="off" id="userName" class="layui-input" lay-verify="required" value="admin">
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <h3 class="card-header text-center">用户登录</h3>
+
+                <div class="card-body">
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
+
+                        <div class="form-group row">
+                            <label for="email" class="col-sm-4 col-form-label text-md-right">邮箱</label>
+
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
+
+                                @if ($errors->has('email'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password" class="col-md-4 col-form-label text-md-right">密码}</label>
+
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+
+                                @if ($errors->has('password'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-6 offset-md-4">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> 记住我
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-8 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    登录
+                                </button>
+
+                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    忘记密码？
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="layui-form-item input-item">
-        <label for="password">密码</label>
-        <input type="password" name="password" placeholder="请输入密码" autocomplete="off" id="password" class="layui-input" lay-verify="required" value="password">
-    </div>
-    <div class="layui-form-item input-item" id="imgCode">
-        <label for="code">验证码</label>
-        <input type="text" name="code" placeholder="请输入验证码" autocomplete="off" id="code" class="layui-input" lay-verify="required" value="123">
-        <img src="../../images/code.jpg">
-    </div>
-    <div class="layui-form-item">
-        <button class="layui-btn layui-block" lay-filter="login" lay-submit>登录</button>
-    </div>
-</form>
-<script type="text/javascript" src="{{ asset('layui/layui.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/login.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/cache.js') }}"></script>
-</body>
-</html>
+</div>
+@endsection

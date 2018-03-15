@@ -1,9 +1,335 @@
 
-// Fonts
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
-
 // Variables
 @import "variables";
 
 // Bootstrap
-@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+@import '~bootstrap/scss/bootstrap';
+
+// 引入markdown样式文件
+@import "./../css/vendor/markdown.scss";
+
+
+body {
+  font-family: Hiragino Sans GB, "Hiragino Sans GB", Helvetica, "Microsoft YaHei", Arial,sans-serif;
+  background-color: #f5f5f5;
+}
+
+/* header */
+
+.navbar-top {
+  border-color: #e7e7e7;
+  background: url(/images/cloud-bar.png) repeat-x #fff;
+  background-color: #fff;
+  box-shadow: 0px 1px 11px 2px rgba(42, 42, 42, 0.1);
+  margin-bottom: 25px;
+  margin-top: 0px;
+  padding-top: 10px;
+  padding-bottom: 0px;
+  .active {
+    background-color: #f5f5f5;
+    //outline: 10px solid #e9ecef;
+  }
+  .dropdown-menu {
+    padding: 0px;
+
+    .dropdown-item a {
+      border-bottom: 1px solid #d8d8d8;
+      line-height: 2.4;
+
+      .far {
+        margin-right: 8px;
+      }
+    }
+  }
+}
+
+/* Sticky footer styles */
+html {
+  position: relative;
+  min-height: 100% ;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 150px;
+  .card {
+    margin-bottom: 1rem!important;
+    a {
+        color: #f4645f;
+    }
+
+    .text-grap {
+      color: #a1a1a1!important;
+    }
+    .btn-white {
+      color: white!important;
+    }
+    .btn-red {
+      background-color: #f4645f;
+      color: #fff!important;
+      border-color: #f4645f;
+    }
+    .header-line {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    .card-header {
+      background-color: #fff;
+    }
+    .footer-grap {
+      color: #a1a1a1!important;
+      a,i,button {
+        color: #a1a1a1;
+        background: none;
+      }
+    }
+    .title-left {
+      width:70%;
+    }
+  }
+  .text-deal{
+    overflow : hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .pagination {
+    flex-wrap: wrap;
+  }
+}
+
+.footer {
+  position: absolute;
+  width: 100% ;
+  bottom: 0px;
+  /* Set the fixed height of the footer here */
+  background-color: #fff;
+
+  .container {
+    padding-right: 15px;
+    padding-left: 15px;
+
+    p {
+      margin: 19px 0;
+      color: #c1c1c1;
+
+      a {
+        color: inherit;
+      }
+    }
+  }
+}
+
+/* User register page */
+.register-page {
+  img.captcha {
+    margin-bottom: 0px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+}
+
+/* User profile page */
+.users-show-page {
+  .user-info {
+    .thumbnail {
+      margin-bottom: 0px;
+    }
+  }
+  .pagination {
+    margin: 12px 0;
+  }
+  .nav-link.active {
+    background: none;
+    border-color: #dee2e6 #dee2e6 #fff;
+  }
+}
+
+
+/* Topic Index Page */
+.posts-index-page, .categories-show-page, .posts-show-page, .root-page {
+  .post-list {
+    .nav > li > a {
+      position: relative;
+      display: block;
+      padding: 5px 14px;
+      font-size: 0.9em;
+    }
+    a {
+      color: #f4645f;
+    }
+    .meta {
+      font-size:0.9em;
+      color: #b3b3b3;
+      a {
+        color: #b3b3b3;
+      }
+    }
+    .badge {
+      background-color: #d8d8d8;
+    }
+    hr {
+      margin-top: 12px;
+      margin-bottom: 12px;
+      border: 0;
+      border-top: 1px solid #dcebf5;
+    }
+    .post-img {
+      max-width: 728px;
+      max-height: 368px;
+    }
+  }
+}
+
+/* Notifications badge */
+
+.create-fa {
+  margin-top: 4px;
+  margin-right: 12px;
+}
+.notifications-badge {
+  margin-top: 4px;
+  margin-right: 12px;
+  .badge-dark {
+    background-color: #EBE8E8;
+  }
+  .badge-danger {
+    background-color: #d15b47 !important;;
+  }
+}
+
+.sidebar {
+  .sidebar-header{
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+}
+
+
+/* PrismJS 1.10.0
+http://prismjs.com/download.html?themes=prism-okaidia&languages=markup+css+clike+javascript+abap+actionscript+ada+apacheconf+apl+applescript+c+asciidoc+asm6502+aspnet+autohotkey+autoit+bash+basic+batch+bison+brainfuck+bro+cpp+csharp+arduino+coffeescript+ruby+css-extras+d+dart+django+diff+docker+eiffel+elixir+elm+erlang+fsharp+flow+fortran+gherkin+git+glsl+go+graphql+groovy+haml+handlebars+haskell+haxe+http+ichigojam+icon+inform7+ini+io+j+java+jolie+json+julia+keyman+kotlin+latex+less+livescript+lolcode+lua+makefile+markdown+matlab+mel+mizar+monkey+n4js+nasm+nginx+nim+nix+nsis+objectivec+ocaml+opencl+oz+parigp+parser+pascal+perl+php+php-extras+powershell+processing+prolog+properties+protobuf+pug+puppet+pure+python+q+qore+r+jsx+renpy+reason+rest+rip+roboconf+crystal+rust+sas+sass+scss+scala+scheme+smalltalk+smarty+sql+stylus+swift+tcl+textile+twig+typescript+vbnet+verilog+vhdl+vim+wiki+xeora+xojo+yaml */
+
+/**
+ * okaidia theme for JavaScript, CSS and HTML
+ * Loosely based on Monokai textmate theme by http://www.monokai.nl/
+ * @author ocodia
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+  border-radius: 4px !important;
+  color: #f8f8f2;
+  background: none;
+  text-shadow: none;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  -webkit-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+
+pre[class*="language-"] {
+  padding: 1em;
+  margin: .5em 0;
+  overflow: auto;
+  border-radius: 0.3em;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+  background: rgba(54, 56, 58, 0.98);
+}
+
+/* Inline code */
+
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+}
+
+span.token {
+  line-height: 26px;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: slategray;
+}
+
+.token.punctuation {
+  color: #f8f8f2;
+}
+
+.namespace {
+  opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #66d9ef;
+}
+
+.token.boolean,
+.token.number {
+  color: #ae81ff;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: #a6e22e;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+  color: #f8f8f2;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.function {
+  color: #e6db74;
+}
+
+.token.keyword {
+  color: #66d9ef;
+}
+
+.token.regex,
+.token.important {
+  color: #fd971f;
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+.token.entity {
+  cursor: help;
+}

@@ -1,33 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="utf-8">
-    <title>@yield('title', '后台管理模板')</title>
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta http-equiv="Access-Control-Allow-Origin" content="*">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" href="favicon.ico">
 
-    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
-    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
-    <META HTTP-EQUIV="expires" CONTENT="0">
+    <title>@yield('title', '茄盒网') - {{ setting('site_name', '茄盒网') }}</title>
+    <meta name="description" content="@yield('description', setting('seo_description', '茄盒网'))" />
+    <meta name="keyword" content="@yield('keyword', setting('seo_keyword', 'Jourdon,blog,茄盒网'))" />
 
+    <!-- Styles -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S" crossorigin="anonymous">
     @yield('style')
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 </head>
-<body class="main_body">
-<div class="layui-layout layui-layout-admin">
-    @yield('body')
+
+<body>
+<div id="app" class="{{ route_class() }}-page">
+
+    @include('layouts._header')
+
+    <div class="container">
+
+        @include('layouts._message')
+        @yield('content')
+
+    </div>
+
+    @include('layouts._footer')
 </div>
 
-@yield('moblie')
+@if (app()->isLocal())
+    @include('sudosu::user-selector')
+@endif
 
-@yield('script')
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}"></script>
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?523c03866798766abb1c6d68b98d8a72";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
 
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+@yield('scripts')
 </body>
 </html>

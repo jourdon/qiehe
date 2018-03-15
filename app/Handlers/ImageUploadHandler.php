@@ -1,25 +1,19 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: dong
- * Date: 2018/1/19
- * Time: 下午3:30
- */
 
 namespace App\Handlers;
 
-use Intervention\Image\Facades\Image;
+use Image;
 
 class ImageUploadHandler
 {
     // 只允许以下后缀名的图片文件上传
     protected $allowed_ext = ["png", "jpg", "gif", 'jpeg'];
 
-    public function save($file, $folder, $file_prefix,$max_width = false)
+    public function save($file, $folder, $file_prefix,$max_width=false)
     {
         // 构建存储的文件夹规则，值如：uploads/images/avatars/201709/21/
         // 文件夹切割能让查找效率更高。
-        $folder_name = "uploads/images/$folder/" . date("Ym", time()) . '/'.date("d", time()).'/';
+        $folder_name = "uploads/images/$folder/" . date("Ym/d/", time());
 
         // 文件具体存储的物理路径，`public_path()` 获取的是 `public` 文件夹的物理路径。
         // 值如：/home/vagrant/Code/larabbs/public/uploads/images/avatars/201709/21/
@@ -47,11 +41,10 @@ class ImageUploadHandler
             $this->reduceSize($upload_path . '/' . $filename, $max_width);
         }
 
-        return [
-            'path' => config('app.url') . "/$folder_name/$filename"
-        ];
+        return config('app.url') . "/$folder_name$filename";
     }
-    public function reduceSize($file_path, $max_width)
+
+    public function reduceSize($file_path,$max_width)
     {
         // 先实例化，传参是文件的磁盘物理路径
         $image = Image::make($file_path);
@@ -69,5 +62,4 @@ class ImageUploadHandler
         // 对图片修改后进行保存
         $image->save();
     }
-
 }

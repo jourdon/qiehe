@@ -2,43 +2,74 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use HasRoles;
+    use Notifiable {
+        notify as protected laravelNotify;
+    }
+    public function notify($instance)
+    {
+        // 如果要通知的人是当前用户，就不必通知了
+        if($this->id==Auth::id()) {
+            return ;
+        }
+        $this->increment('notification_count');
+        $this->laravelNotify($instance);
+    }
 
     protected $fillable = [
-        'name', 'email', 'password','is_admin','avatar','status','ip','last_login_in','user_agent','sex'
+        'name', 'email', 'password','introduction','avatar'
     ];
 
     protected $hidden = [
         'password', 'remember_token',
     ];
 
-    /*
-     * 访问器是 访问属性时 修改，
-     * 修改器是在 写入数据库前 修改。
-     * 修改器是数据持久化，访问器是临时修改
-     *
-     * 以下为修改器
-     * 注意命名规范是 set{属性的驼峰式命名}Attribute
-     */
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
+    }
+
+    public function isAuthorOf($model)
+    {
+        return $this->id == $model->user_id;
+    }
+
+    public function markAsRead()
+    {
+        $this->notification_count = 0;
+        $this->save();
+        $this->unreadNotifications->markAsRead();
+    }
     public function setPasswordAttribute($value)
     {
-        // 如果值的长度等于 60，即认为是已经做过加密的情况
+
         if (strlen($value) != 60) {
 
-            // 不等于 60，做密码加密处理
             $value = bcrypt($value);
         }
         $this->attributes['password'] = $value;
     }
-
-    public function posts()
+    public function setAvatarAttribute($path)
     {
-        return $this->hasMany(Post::class);
+        // 如果不是 `http` 子串开头，那就是从后台上传的，需要补全 URL
+        if ( ! starts_with($path, 'http')) {
+
+            // 拼接完整的 URL
+            $path = config('app.url') . "/uploads/images/avatars/$path";
+        }
+
+        $this->attributes['avatar'] = $path;
     }
 }

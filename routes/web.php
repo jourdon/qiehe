@@ -11,35 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    //return redirect()->route('admin');
-    return view('welcome');
-});
+//Route::get('/', 'PagesController@root')->name('root');
+Route::get('/', 'PostsController@index')->name('root');
 
-Route::group([
-    'prefix'=>'admin',
-    'namespace'=>'Admin',
-    'middleware'=> 'admin',
-], function(){
-    Route::get('/','IndexController@index')->name('admin');
-    Route::get('/main','MainController@main')->name('main');
-    Route::get('/navs','MainController@navs')->name('navs');
-
-    Route::post('/image_upload','UsersController@imageUpload')->name('users.imageUpload');
-    Route::resource('posts','PostsController');
-    Route::get('api/posts','PostsController@posts');
-
-    //Route::get('down','ConfigController@down');
-    //Route::get('up','ConfigController@up');
-    Route::resource('users','UsersController');
-    Route::get('api/users','UsersController@users');
-    //Route::resource('roles','RolesController');
-    //Route::get('api/roles','RolesController@roles');
-    //Route::resource('permissions','PermissionController');
-    //Route::get('api/permissions','PermissionController@permissions');
-});
-////////////////////////////////////
 //Auth::routes();
+
 // Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
@@ -54,6 +30,18 @@ Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm'
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
-///////////////////////////////////////////
-///
-Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('users', 'UsersController', ['only' => ['show', 'update', 'edit']]);
+
+Route::resource('posts', 'PostsController', ['only' => ['index', 'create', 'store', 'update', 'edit', 'destroy']]);
+Route::get('posts/{post}/{slug?}', 'PostsController@show')->name('posts.show');
+
+Route::post('posts/upload', 'PostsController@upload')->name('posts.upload');
+
+Route::resource('categories', 'CategoriesController', ['only' => ['show']]);
+
+Route::resource('replies', 'RepliesController', ['only' => [ 'store',  'destroy']]);
+
+Route::resource('notifications', 'NotificationsController', ['only' => ['index']]);
+
+Route::get('permission-denied', 'PagesController@permissionDenied')->name('permission-denied');

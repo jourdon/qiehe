@@ -1,6 +1,7 @@
 <?php
 
 use Faker\Generator as Faker;
+use Carbon\Carbon;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,13 +15,13 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(App\Models\User::class, function (Faker $faker) {
-
-    $now = \Carbon\Carbon::now()->toDateTimeString();
+    static $password;
+    $now = Carbon::now()->toDateTimeString();
 
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
-        'password' => bcrypt('password'), // password
+        'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
         'introduction' => $faker->sentence(),
         'created_at' => $now,

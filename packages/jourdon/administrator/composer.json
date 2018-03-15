@@ -1,0 +1,15 @@
+{
+    "name": "jourdon/administrator",
+    "description": "A database interface package for Laravel",
+    "authors": [
+        {
+            "name": "jourdon",
+            "email": "admin@qiehe.net"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.0.0",
+        "laravel/framework": "5.6.*"
+    }
+}
