@@ -60,6 +60,43 @@
         s.parentNode.insertBefore(bp, s);
     })();
 </script>
+<div id="code"></div>
+<div id="code_img"></div>
+<a id="gotop" href="javascript:void(0)"><img src="{{asset('images/top.png')}}" alt=""/></a>
+<script type="text/javascript">
+    function b(){
+        h = $(window).height();
+        t = $(document).scrollTop();
+        if(t > h){
+            $('#gotop').show();
+        }else{
+            $('#gotop').hide();
+        }
+    }
+    $(document).ready(function(e) {
+
+        b();
+
+        $('#gotop').click(function(){
+            $(document).scrollTop(0);
+        });
+
+        $('#code').hover(function(){
+            $(this).attr('id','code_hover');
+            $('#code_img').show();
+            $('#code_img').addClass('a-fadeinL');
+        },function(){
+            $(this).attr('id','code');
+            $('#code_img').hide();
+        })
+
+    });
+
+    $(window).scroll(function(e){
+        b();
+    });
+</script>
+<!--返回顶部结束-->
 
 @yield('scripts')
 </body>
