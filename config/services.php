@@ -39,5 +39,9 @@ return [
         'appid' => env('BAIDU_TRANSLATE_APPID'),
         'key'   => env('BAIDU_TRANSLATE_KEY'),
     ],
-
+    'qq' => [
+        'client_id' => env('QQ_KEY'),
+        'client_secret' => env('QQ_SECRET'),
+        'redirect' => env('QQ_REDIRECT_URI'),
+    ],
 ];

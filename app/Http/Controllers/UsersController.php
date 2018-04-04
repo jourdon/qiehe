@@ -33,6 +33,7 @@ class UsersController extends Controller
                 $data['avatar']=$result;
             }
         }
+        if($user->status==0) $data['status']=1;
         $user->update($data);
         return redirect()->route('users.show',$user->id)->with('success','个人资料更新成功');
     }

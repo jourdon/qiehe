@@ -16,20 +16,28 @@ Route::get('/', 'PostsController@index')->name('root');
 
 //Auth::routes();
 
+//登录跳转到QQ 登录
+Route::get('login', function(){
+    return redirect('socials/qq/authorizations');
+})->name('login');
+Route::get('register', function(){
+    return redirect('socials/qq/authorizations');
+})->name('register');
+
 // Authentication Routes...
-Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('login', 'Auth\LoginController@login');
+//Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+//Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 // Registration Routes...
-Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-Route::post('register', 'Auth\RegisterController@register');
+//Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+//Route::post('register', 'Auth\RegisterController@register');
 
 // Password Reset Routes...
-Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+//Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+//Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+//Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+//Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 Route::resource('users', 'UsersController', ['only' => ['show', 'update', 'edit']]);
 
@@ -45,3 +53,9 @@ Route::resource('replies', 'RepliesController', ['only' => [ 'store',  'destroy'
 Route::resource('notifications', 'NotificationsController', ['only' => ['index']]);
 
 Route::get('permission-denied', 'PagesController@permissionDenied')->name('permission-denied');
+
+// 第三方登录
+Route::get('socials/{social_type}/authorizations', 'AuthorizationsController@socialStore')
+    ->name('socials.authorizations.store');
+Route::get('socials/{social_type}/callback', 'AuthorizationsController@callback')
+    ->name('socials.authorizations.back');

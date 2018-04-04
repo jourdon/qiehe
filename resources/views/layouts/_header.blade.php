@@ -21,8 +21,7 @@
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
                 @guest
-                    <li><a class="nav-link" href="{{ route('login') }}">登录</a></li>
-                    <li><a class="nav-link" href="{{ route('register') }}">注册</a></li>
+                    <li><a class="nav-link" href="{{ url('socials/qq/authorizations') }}"><img src="http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_4.png"></a></li>
                     @else
                         @can('manage_contents')
                         <li>

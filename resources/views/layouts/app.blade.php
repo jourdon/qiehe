@@ -11,7 +11,7 @@
     <title>@yield('title', '茄盒网') - {{ setting('site_name', '茄盒网') }}</title>
     <meta name="description" content="@yield('description', setting('seo_description', '茄盒网'))" />
     <meta name="keyword" content="@yield('keyword', setting('seo_keyword', 'Jourdon,blog,茄盒网'))" />
-
+    <link rel="shortcut icon" href="/favicon.png">
     <!-- Styles -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S" crossorigin="anonymous">
     @yield('style')

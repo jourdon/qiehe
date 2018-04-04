@@ -55,7 +55,11 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <textarea name="body" class="form-control" id="body" rows="3" placeholder="请使用 Markdown 格式书写 ;-)，代码块请标语言，否则无高亮，OK！开始你的创作吧！。" required>{{ old('body', $post->body ) }}</textarea>
+                                        <textarea name="body" class="form-control" id="body" rows="3" placeholder="请使用 Markdown 格式书写 ;-)，代码块请标语言,示例如下，否则无高亮
+```php
+  //代码开始
+```
+OK！开始你的创作吧！" required>{{ old('body', $post->body ) }}</textarea>
                                     </div>
 
                                     <div class="form-group">
@@ -78,7 +82,7 @@
             autosave: {
                 enabled: true,
                 delay: 5000,
-                unique_id: "content_{{ $post->id?:Auth::id() }}",
+                unique_id: "content_{{ $post->id?:0 }}",
             },
             forceSync: true,
             toolbar: ["bold", "italic",'strikethrough', "heading",'|',"quote",'code','table','horizontal-rule','unordered-list','ordered-list','|','link','image','|','clean-block','preview','side-by-side','fullscreen', "|", ],

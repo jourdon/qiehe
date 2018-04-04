@@ -44,3 +44,25 @@ function model_plural_name($model)
     // 获取子串的复数形式，例如：传参 `user` 会得到 `users`
     return str_plural($snake_case_name);
 }
+
+function username($username)
+{
+    $map = [
+        'email' => filter_var($username,FILTER_VALIDATE_EMAIL),
+        //'phone' => validatePhoneNumber($username),
+        'name'  => validateUsername($username),
+    ];
+    foreach($map as $key => $item)
+    {
+        if($item) return $key;
+    }
+    return 'name';
+}
+function validatePhoneNumber($phone)
+{
+    return preg_match('/^(13\d|14[57]|15[^4,\D]|17[3678]|18\d)\d{8}|170[059]\d{7}$/',$phone);
+}
+function validateUsername($username)
+{
+    return preg_match('/^[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\xff-\xff]*$/',$username);
+}
