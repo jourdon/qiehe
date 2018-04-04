@@ -41,7 +41,8 @@
 
                 <div class="card-body">
                     <div class="markdown" >
-                        <p>{!! clean(Parsedown::instance()->setMarkupEscaped(true)->text($post->body),'user_post_body') !!}
+                        <p>
+                            {!! clean(ParsedownExtra::instance()->text($post->body),'user_post_body') !!}
                         </p>
                     </div>
                 </div>
@@ -98,3 +99,17 @@
         </div>
     </div>
 @stop
+
+@section('scripts')
+    <script src="https://cdn.bootcss.com/showdown/1.8.6/showdown.js"></script>
+    <script>
+        function OnInput(event){
+            $('#preview-box').show();
+            var converter = new showdown.Converter();
+            var html = converter.makeHtml(event.target.value);
+            console.log(event.target.value);
+            console.log(html);
+            $("#preview-box").html(html);
+        }
+    </script>
+    @endsection

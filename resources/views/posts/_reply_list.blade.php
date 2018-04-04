@@ -5,7 +5,7 @@
                 <img class="mr-3 img-thumbnail" alt="{{ $reply->user->name }}" src="{{ $reply->user->avatar }}"  style="width:48px;height:48px;"/>
             </a>
 
-            <div class="media-body">
+            <div class="media-body markdown">
                 <h5 class="mt-0">
                     <a href="{{ route('users.show', [$reply->user_id]) }}" title="{{ $reply->user->name }}">
                         {{ $reply->user->name }}
@@ -27,7 +27,7 @@
                         @endcan
                  </h5>
                 <p>
-                    {!! $reply->body !!}
+                    {!! clean(ParsedownExtra::instance()->text($reply->body),'user_post_body') !!}
                 </p>
             </div>
         </li>

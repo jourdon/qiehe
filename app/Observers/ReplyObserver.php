@@ -19,17 +19,9 @@ class ReplyObserver
         $post->user->notify(new PostReplied($reply));
     }
 
-    public function creating(Reply $reply)
-    {
-        $reply->body = clean($reply->body,'user_post_body');
-    }
     public function deleted(Reply $reply)
     {
         $reply->post->decrement('reply_count',1);
     }
 
-    public function saving(Reply $reply)
-    {
-        $reply->body = clean($reply->body,'user_post_body');
-    }
 }
