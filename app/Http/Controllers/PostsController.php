@@ -19,13 +19,10 @@ class PostsController extends Controller
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
-	public function index(Post $post,Link $link)
+	public function index(Post $post)
 	{
 		$posts = $post->with('user','category')->orderBy('created_at','desc')->paginate(5);
-        $hots = $post->orderBy('view_count','desc')->limit(10)->get();
-        $tops = $post->where('top',1)->orderBy('updated_at','desc')->limit(10)->get();
-        $links = $link->getAllCached();
-		return view('posts.index', compact('posts','hots','tops','links'));
+		return view('posts.index', compact('posts'));
 	}
 
     public function show(Request $request,Post $post)

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light navbar-top">
+<nav class="navbar navbar-expand-md navbar-light navbar-top sticky-top">
     <div class="container">
         <!-- logo Image -->
         <a class="navbar-brand" href="{{ url('/') }}">
@@ -21,7 +21,10 @@
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
                 @guest
-                    <li><a class="nav-link" href="{{ url('socials/qq/authorizations') }}"><img src="http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_4.png"></a></li>
+                    <a href="{{ url('socials/qq/authorizations') }}" ><img src="http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_7.png"></a>
+
+                    <li><a class="nav-link" href="{{ route('login') }}"><img src="http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_7.png"></a></li>
+                    <li><a class="nav-link" href="{{ route('register') }}">注册</a></li>
                     @else
                         @can('manage_contents')
                         <li>

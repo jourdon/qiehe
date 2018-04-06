@@ -6,7 +6,7 @@
 @section('content')
 
     <div class="row">
-        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 post-list">
+        <div class="col-md-8 col-sm-12 col-xs-12 post-list">
             <div class="card">
                 @if($post->thumbnail)
                     <div class="">
@@ -15,27 +15,29 @@
                 @endif
                 <div class="card-header">
                     <div class="float-left title-left">
-
+                        <i class="fas fa-bars text-grep"></i> <a href="{{ route('categories.show', $post->category->id) }}" class="card-link" title="{{ $post->category->name }}">{{ $post->category->name }}</a>
+                        <span class="text-grap">   /  {{ $post->updated_at->diffForHumans() }}</span>
                         <h2 class="card-title" style="padding-top: 10px">
                             {{ $post->title }}
                         </h2>
                     </div>
 
                     <div class="d-flex flex-wrap align-items-end flex-column">
+
                         <div class="p-2">
-                            <i class="fas fa-bars text-grep"></i> <a href="{{ route('categories.show', $post->category->id) }}" class="card-link" title="{{ $post->category->name }}">{{ $post->category->name }}</a>
-                            <span class="text-grap">   /  {{ $post->updated_at->diffForHumans() }}</span>
+                            <i class="fas fa-bookmark"></i>
+                            <a href="#" class="btn btn-sm btn-red" role="button" aria-pressed="true">标签</a>
+                        </div>
+                        <div class="p-2">
+                            <i class="fas fa-user"></i> <a href="{{ route('users.show', [$post->user_id]) }}" class="card-link text-right text-red">{{ $post->user->name }}</a>
                         </div>
                         <div class="p-2">
                             <span class="text-grap"><i class="fas fa-eye"></i>
-                                {{ $post->view_count }}
+                                {{ $post->view_count }} /
+                                <i class="fas fa-comment-alt"></i>
+                                {{ $post->reply_count }}
                             </span>
                         </div>
-                        <div class="mt-auto p-2">
-                        <span class="text-grap"><i class="fas fa-comment-alt"></i>
-                            {{ $post->reply_count }}
-                        </span>
-                    </div>
                     </div>
                 </div>
 
@@ -72,30 +74,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
-            <div class="card">
-                <div class="card-body">
-                    <div class="text-center">
-                        作者：<a href="{{ route('users.show', [$post->user_id]) }}" class="card-link text-right text-red">{{ $post->user->name }}</a>
-                    </div>
-                    <hr>
-                    <div align="center">
-                            <a href="{{ route('users.show', $post->user->id) }}">
-                                <img class="img-fluid" src="{{ $post->user->avatar }}">
-                            </a>
-                        </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header text-center">
-                    {{ $post->user->name }}的其它帖子
-                </div>
-                <div class="card-body footer-grap">
-                    @foreach($post->user->posts->take(-10)->sortByDesc('created_at') as $item)
-                        <p><a href="{{ $item->link() }}">{{ str_limit($item->title,27) }}</a> </p>
-                    @endforeach
-                </div>
-            </div>
+        <div class="col-md-4 hidden-sm hidden-xs">
+            @include('posts._sidebar')
         </div>
     </div>
 @stop

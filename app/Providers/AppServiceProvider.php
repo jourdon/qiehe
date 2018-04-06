@@ -26,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
         Category::observe(CategoryObserver::class);
 
         View::composer('layouts._header', 'App\Http\ViewComposers\CategoryViewComposer');
+        View::composer('posts._sidebar', 'App\Http\ViewComposers\SidebarViewComposer');
 
         Carbon::setLocale('zh');
     }

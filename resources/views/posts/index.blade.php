@@ -4,8 +4,8 @@
 
 @section('content')
 
-    <div class="row">
-        <div class="col-lg-8 col-md-9 post-list">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 post-list">
 
             @if (isset($category))
                 <nav aria-label="breadcrumb">
@@ -19,7 +19,7 @@
             @include('posts._post_list', ['posts' => $posts])
         </div>
 
-        <div class="col-lg-4 col-md-3 sidebar">
+        <div class="col-lg-4 sidebar">
             @include('posts._sidebar')
         </div>
     </div>
