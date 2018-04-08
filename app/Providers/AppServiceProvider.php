@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Models\Category;
 use App\Models\Link;
+use App\Models\Tag;
 use App\Observers\CategoryObserver;
 use App\Observers\LinkObserver;
+use App\Observers\TagObserver;
 use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
@@ -24,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
         \App\Models\Post::observe(\App\Observers\PostObserver::class);
         Link::observe(LinkObserver::class);
         Category::observe(CategoryObserver::class);
+        Tag::observe(TagObserver::class);
 
         View::composer('layouts._header', 'App\Http\ViewComposers\CategoryViewComposer');
         View::composer('posts._sidebar', 'App\Http\ViewComposers\SidebarViewComposer');

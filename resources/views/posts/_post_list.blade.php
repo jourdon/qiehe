@@ -20,18 +20,18 @@
                 <div class="card-body">
                     <h5 class="card-title text-center"><a href="{{ $post->link() }}">{{ $post->title }}</a></h5>
                     <p class="card-text text-grap">
-                    {{--<div class="markdown" >--}}
-                        {{--{{$post->body }}--}}
                         {{ $post->excerpt }}
-{{--                        {!! Parsedown::instance()->setSafeMode(true)->text($post->excerpt) !!}--}}
-                    {{--</div>--}}
                     </p>
                 </div>
                 <div class="card-body text-center">
                     <a class="text-grap " href="{{ $post->link() }}"><i class="fas fa-hand-point-right"></i>  阅读更多&hellip;</a>
                     <div class="float-right ">
-                        <i class="fas fa-bookmark"></i>
-                        <a href="#" class="btn btn-sm btn-red" role="button" aria-pressed="true">标签</a>
+                        <i class="fas fa-tags"></i>
+                        @if(count($post->tags))
+                        @foreach($post->tags as $tag)
+                            <a href="{{ route('tags.show',$tag->slug) }}" class="badge badge-danger btn-red" >{{ $tag->title }}</a>
+                        @endforeach
+                            @endif
                     </div>
                 </div>
                 @if($loop->last && $posts->lastPage()!=1)

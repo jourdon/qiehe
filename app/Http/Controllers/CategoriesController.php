@@ -9,12 +9,11 @@ use Illuminate\View\View;
 
 class CategoriesController extends Controller
 {
-    public function show(Category $category,Post $post,Link $link)
+    public function show(Category $category,Post $post)
     {
-        $posts = $post->where('category_id',$category->id)->paginate(5);
-        $hots = $post->orderBy('view_count','desc')->limit(10)->get();
-        $tops = $post->where('top',1)->orderBy('updated_at','desc')->limit(10)->get();
-        $links = $link->getAllCached();
-        return view('posts.index',compact('posts','category','hots','tops','links'));
+        $posts = $post->with('user','category','tags')
+            ->where('category_id',$category->id)
+            ->paginate(5);
+        return view('posts.index',compact('posts','category'));
     }
 }

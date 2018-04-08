@@ -10583,13 +10583,6 @@ body .pagination {
   color: #b3b3b3;
 }
 
-.posts-index-page .post-list .badge,
-.categories-show-page .post-list .badge,
-.posts-show-page .post-list .badge,
-.root-page .post-list .badge {
-  background-color: #d8d8d8;
-}
-
 .posts-index-page .post-list hr,
 .categories-show-page .post-list hr,
 .posts-show-page .post-list hr,
@@ -10620,17 +10613,21 @@ body .pagination {
   margin-right: 12px;
 }
 
-.notifications-badge .badge-dark {
+.badge-dark {
   background-color: #EBE8E8;
 }
 
-.notifications-badge .badge-danger {
-  background-color: #d15b47 !important;
+.badge-danger {
+  background-color: #f4645f !important;
 }
 
 .sidebar .sidebar-header {
   margin-top: 0px;
   margin-bottom: 0px;
+}
+
+.sidebar .tags-list {
+  margin: 3px;
 }
 
 #preview-box {

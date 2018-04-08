@@ -163,9 +163,9 @@ body {
         color: #b3b3b3;
       }
     }
-    .badge {
-      background-color: #d8d8d8;
-    }
+    //.badge {
+    //  background-color: #d8d8d8;
+    //}
     hr {
       margin-top: 12px;
       margin-bottom: 12px;
@@ -188,18 +188,21 @@ body {
 .notifications-badge {
   margin-top: 4px;
   margin-right: 12px;
-  .badge-dark {
-    background-color: #EBE8E8;
-  }
-  .badge-danger {
-    background-color: #d15b47 !important;;
-  }
+}
+.badge-dark {
+  background-color: #EBE8E8;
+}
+.badge-danger {
+  background-color: #f4645f !important;;
 }
 
 .sidebar {
   .sidebar-header{
     margin-top: 0px;
     margin-bottom: 0px;
+  }
+  .tags-list {
+    margin: 3px;
   }
 }
 #preview-box {

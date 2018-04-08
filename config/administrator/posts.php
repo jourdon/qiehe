@@ -23,20 +23,35 @@ return [
             'title'    => '作者',
             'sortable' => false,
             'output'   => function ($value, $model) {
+                $model->with('users');
                 $avatar = $model->user->avatar;
                 $value = empty($avatar) ? 'N/A' : '<img src="'.$avatar.'" style="height:22px;width:22px"> ' . $model->user->name;
                 return model_link($value, $model);
             },
         ],
+        'tags' => [
+            'title'  => '标签',
+            'output' => function ($value, $model) {
+                $model->with('tags');
+                $result = [];
+                foreach ($model->tags as $tag) {
+                    $result[] = $tag->title;
+                }
+
+                return empty($result) ? '' : implode($result, ' | ');
+            },
+            'sortable' => false,
+        ],
         'category' => [
             'title'    => '分类',
             'sortable' => false,
             'output'   => function ($value, $model) {
+                $model->with('category');
                 return model_admin_link($model->category->name, $model->category);
             },
         ],
-        'reply_count' => [
-            'title'    => '评论',
+        'view_count' => [
+            'title'    => '浏览',
         ],
         'operation' => [
             'title'  => '管理',
@@ -73,6 +88,11 @@ return [
             'search_fields'      => ["CONCAT(id, ' ', name)"],
             'options_sort_field' => 'id',
         ],
+        'tags' => [
+            'title'              => '标签',
+            'type'               => 'relationship',
+            'name_field'         => 'title',
+        ],
         'top'   =>[
             'title' =>  '置顶',
             'type'  => 'bool',
@@ -81,7 +101,7 @@ return [
             'title'    => '评论',
         ],
         'view_count' => [
-            'title'    => '查看',
+            'title'    => '浏览',
         ],
     ],
     'filters' => [

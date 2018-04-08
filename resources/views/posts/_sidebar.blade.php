@@ -1,5 +1,23 @@
 <div class="card">
     <div class="card-header text-center sidebar-header">
+        <i class="fas fa-tags"></i>
+        标签云
+    </div>
+    <div class="card-body">
+        @if(count($tags))
+            @foreach($tags as $key=>$tag)
+                <a href="{{ route('tags.show',$tag->slug) }}" class="badge badge-danger btn-red tags-list" >
+                    {{ $tag->title }}
+                        <span class="badge badge-light">{{ count($tag->posts) }}</span>
+                        </a>
+            @endforeach
+        @else
+            <p class="text-center">暂无数据</p>
+        @endif
+    </div>
+</div>
+<div class="card">
+    <div class="card-header text-center sidebar-header">
         <i class="fas fa-sort-amount-up"></i>
         置顶
     </div>

@@ -25,11 +25,8 @@ class Post extends Model
     {
         return route('posts.show',array_merge([$this->id,$this->slug],$params));
     }
-    //public function getViewCountAttribute($value)
-    //{
-    //
-    //    $this->attributes['view_count']+=1;
-    //    $this->save();
-    //    return $value;
-    //}
+    public function tags()
+    {
+        return $this->belongsToMany('App\Models\Tag');
+    }
 }

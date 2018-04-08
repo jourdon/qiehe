@@ -13,7 +13,7 @@
     <meta name="keyword" content="@yield('keyword', setting('seo_keyword', 'Jourdon,blog,茄盒网'))" />
     <link rel="shortcut icon" href="/favicon.png">
     <!-- Styles -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S" crossorigin="anonymous">
+    <link href="https://lib.baomitu.com/font-awesome/5.0.8/web-fonts-with-css/css/fontawesome-all.min.css" rel="stylesheet">
     @yield('style')
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
@@ -60,6 +60,7 @@
         s.parentNode.insertBefore(bp, s);
     })();
 </script>
+<!--返回顶部-->
 <div id="code"></div>
 <div id="code_img"></div>
 <a id="gotop" href="javascript:void(0)"><img src="{{asset('images/top.png')}}" alt=""/></a>

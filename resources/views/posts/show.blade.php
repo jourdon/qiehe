@@ -6,7 +6,7 @@
 @section('content')
 
     <div class="row">
-        <div class="col-md-8 col-sm-12 col-xs-12 post-list">
+        <div class="col-lg-8  post-list">
             <div class="card">
                 @if($post->thumbnail)
                     <div class="">
@@ -25,8 +25,10 @@
                     <div class="d-flex flex-wrap align-items-end flex-column">
 
                         <div class="p-2">
-                            <i class="fas fa-bookmark"></i>
-                            <a href="#" class="btn btn-sm btn-red" role="button" aria-pressed="true">标签</a>
+                            <i class="fas fa-tags"></i>
+                            @foreach($post->tags()->get() as $tag)
+                            <a href="#" class="badge badge-danger btn-red" >{{ $tag->title }}</a>
+                                @endforeach
                         </div>
                         <div class="p-2">
                             <i class="fas fa-user"></i> <a href="{{ route('users.show', [$post->user_id]) }}" class="card-link text-right text-red">{{ $post->user->name }}</a>
@@ -74,7 +76,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 hidden-sm hidden-xs">
+        <div class="col-lg-4 sidebar">
             @include('posts._sidebar')
         </div>
     </div>

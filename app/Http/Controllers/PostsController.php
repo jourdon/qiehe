@@ -7,6 +7,7 @@ use App\Handlers\ImageUploadHandler;
 use App\Models\Category;
 use App\Models\Link;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
@@ -21,7 +22,10 @@ class PostsController extends Controller
 
 	public function index(Post $post)
 	{
-		$posts = $post->with('user','category')->orderBy('created_at','desc')->paginate(5);
+		$posts = $post
+            ->with('user','category','tags')
+            ->orderBy('created_at','desc')
+            ->paginate(5);
 		return view('posts.index', compact('posts'));
 	}
 
@@ -39,7 +43,8 @@ class PostsController extends Controller
 	{
 	    $this->authorize('create',$post);
 	    $categories = Category::all();
-		return view('posts.create_and_edit', compact('post','categories'));
+        $tags = Tag::pluck('id','name');
+        return view('posts.create_and_edit', compact('post','categories','tags'));
 	}
 
 	public function store(PostRequest $request,Post $post,ImageUploadHandler $uploader)
@@ -61,13 +66,15 @@ class PostsController extends Controller
 	{
         $this->authorize('update', $post);
         $categories = Category::all();
-        return view('posts.create_and_edit', compact('post','categories'));
+        $tags = Tag::pluck('id','title');
+        return view('posts.create_and_edit', compact('post','categories','tags'));
 	}
 
 	public function update(PostRequest $request, Post $post,ImageUploadHandler $uploader)
 	{
 		$this->authorize('update', $post);
         $data=$request->all();
+        $post->tags()->sync($request->tags,true);
         if($request->thumbnail) {
             $result = $uploader->save($request->thumbnail,'thumbnail',$post->id,728);
             if($result) {

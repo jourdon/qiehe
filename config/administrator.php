@@ -46,6 +46,7 @@ return array(
             'categories',
             'posts',
             'replies',
+            'tags',
         ],
         '站点管理' => [
             'settings.site',

@@ -27,9 +27,13 @@ class PostObserver
             dispatch(new TranslateSlug($post));
         }
     }
-
-    public function deleted(Post $post)
+    public function updated(Post $post)
     {
-        //\DB::table('replies')->where('post_id',$post->id)->delete();jiih
+        //如果有更新标题更新slug
+        if($post->getOriginal('title')!=$post->title){
+            //推送任到进队列
+            dispatch(new TranslateSlug($post));
+        }
     }
+
 }
