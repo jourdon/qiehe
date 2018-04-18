@@ -43,7 +43,7 @@ class PostsController extends Controller
 	{
 	    $this->authorize('create',$post);
 	    $categories = Category::all();
-        $tags = Tag::pluck('id','name');
+        $tags = Tag::pluck('id','title');
         return view('posts.create_and_edit', compact('post','categories','tags'));
 	}
 

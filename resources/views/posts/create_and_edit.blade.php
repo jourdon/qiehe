@@ -62,13 +62,11 @@
                                         <label  class="col-sm-1 col-form-label">缩略图 </label>
                                         <div class="col-sm-11">
                                             <div class="custom-file">
-                                            <input type="file" name="thumbnail" class="custom-file-input" id="inputGroupFile01">
-                                            <label class="custom-file-label" for="inputGroupFile01">选择缩略图上传</label>
+                                            <input type="file" name="thumbnail" class="custom-file-input" id="inputGroupFile">
+                                            <label class="custom-file-label" for="inputGroupFile">选择缩略图上传</label>
                                         </div>
-                                        @if($post->thumbnail)
                                             <br>
-                                            <img class="img-thumbnail rounded" src="{{ $post->thumbnail }}" width="728" />
-                                        @endif
+                                            <img class="img-thumbnail rounded imgshow" src="{{ $post->thumbnail }}" width="728" />
                                         </div>
                                     </div>
 
@@ -119,8 +117,7 @@ OK！开始你的创作吧！" required>{{ old('body', $post->body ) }}</textare
             toolbarTips: true,
             spellChecker: false,
         });
-    </script>
-    <script type="text/javascript">
+
         $(function() {
             $('textarea').inlineattachment({
                 uploadUrl: "{{ route('posts.upload') }}",
@@ -128,6 +125,15 @@ OK！开始你的创作吧！" required>{{ old('body', $post->body ) }}</textare
                     '_token': "{{ csrf_token() }}",
                 },
             });
+        });
+
+        $('#inputGroupFile').change(function(ev){
+            file=$(this).get(0).files[0];
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload=function(e){
+                $('.imgshow').attr('src',e.target.result);
+            }
         });
     </script>
 
