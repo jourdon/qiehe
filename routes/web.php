@@ -15,29 +15,31 @@
 Route::get('/', 'PostsController@index')->name('root');
 
 //Auth::routes();
-
-//登录跳转到QQ 登录
-Route::get('login', function(){
-    return redirect('socials/qq/authorizations');
-})->name('login');
-Route::get('register', function(){
-    return redirect('socials/qq/authorizations');
-})->name('register');
-
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+//本地启用
+if (app()->isLocal()) {
+    //用户名或邮箱登录
+    // Authentication Routes...
+    Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+    Route::post('login', 'Auth\LoginController@login');
 
-// Authentication Routes...
-/*Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('login', 'Auth\LoginController@login');
 
+    Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+    Route::post('register', 'Auth\RegisterController@register');
 
-Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-Route::post('register', 'Auth\RegisterController@register');
-
-Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-Route::post('password/reset', 'Auth\ResetPasswordController@reset');*/
+    Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+    Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+    Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+    Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+}else{
+    //登录跳转到QQ 登录
+    Route::get('login', function(){
+        return redirect('socials/qq/authorizations');
+    })->name('login');
+    Route::get('register', function(){
+        return redirect('socials/qq/authorizations');
+    })->name('register');
+}
 
 Route::resource('users', 'UsersController', ['only' => ['show', 'update', 'edit']]);
 

@@ -26,7 +26,7 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|between:3,25|regex:/^[A-Za-z0-9\-\_]+$/|unique:users,name,' . Auth::id(),
+            'name' => 'required|between:2,25|regex:/^[A-Za-z0-9_\-\x{4e00}-\x{9fa5}]+$/u|unique:users,name,' . Auth::id(),
             'email' => ['required','email',Rule::unique('users')->ignore(Auth::id()),],
             'introduction' => 'max:80',
             'avatar' => 'mimes:jpeg,bmp,png,gif|dimensions:min_width=200,min_height=200',
