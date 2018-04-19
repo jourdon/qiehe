@@ -59,6 +59,7 @@ class PostsController extends Controller
             }
         }
         $post->save();
+        $post->tags()->sync($request->tags,true);
         return redirect()->to($post->link())->with('message', '创建成功.');
 	}
 
