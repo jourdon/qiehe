@@ -45,7 +45,7 @@ Route::resource('users', 'UsersController', ['only' => ['show', 'update', 'edit'
 
 Route::get('users_json','UsersController@usersJson')->name('users.json');
 
-Route::put('cache_at','UsersController@cacheAt')->name('users.cache.at');
+Route::get('cache_at','UsersController@cacheAt')->name('users.cache.at');
 
 Route::resource('posts', 'PostsController', ['only' => ['index', 'create', 'store', 'update', 'edit', 'destroy']]);
 Route::get('posts/{post}/{slug?}', 'PostsController@show')->name('posts.show');

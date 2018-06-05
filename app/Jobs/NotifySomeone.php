@@ -24,11 +24,10 @@ class NotifySomeone implements ShouldQueue
 
     public function handle()
     {
-        $body=$this->reply->body;
         //作者ID
         $post_user_id =$this->reply->post->user->id;
         //匹配@ 返回body 和reply_user_id
-        $AtData=matchAt($this->reply,$body);
+        $AtData=$this->reply->matchAt($this->reply);
 
         //更新 @ body 和被回复ID
         $this->reply->update([

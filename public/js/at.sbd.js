@@ -45,9 +45,9 @@ window.onload=function(){
 $('#reply-body').on("inserted.atwho", function(event, $li, browser_event) {
     var atName = $li[0].innerText;
     $.ajax({
-        type: "PUT",
+        type: "GET",
         url: "/cache_at",
-        data: {'name':atName,'_token':'{{csrf_token()}}'},
+        data: {'name':atName},
         success: function(data){
             // console.log(data);
         }
