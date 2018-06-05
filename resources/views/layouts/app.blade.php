@@ -39,7 +39,8 @@
 @endif
 
 <!-- Scripts -->
-<script src="{{ asset('js/app.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+@yield('scripts')
 <script>
     var _hmt = _hmt || [];
     (function() {
@@ -98,7 +99,5 @@
     });
 </script>
 <!--返回顶部结束-->
-
-@yield('scripts')
 </body>
 </html>

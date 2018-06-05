@@ -3,6 +3,9 @@
 @section('title', $post->title)
 @section('description', $post->excerpt)
 
+@section('style')
+    <link href="http://ichord.github.io/At.js/dist/css/jquery.atwho.css" rel="stylesheet">
+    @endsection
 @section('content')
 
     <div class="row">
@@ -84,14 +87,7 @@
 
 @section('scripts')
     <script src="https://cdn.bootcss.com/showdown/1.8.6/showdown.js"></script>
-    <script>
-        function OnInput(event){
-            $('#preview-box').show();
-            var converter = new showdown.Converter();
-            var html = converter.makeHtml(event.target.value);
-            console.log(event.target.value);
-            console.log(html);
-            $("#preview-box").html(html);
-        }
-    </script>
+    <script type="text/javascript" src="{{ asset('js/jquery.caret.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery.atwho.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/at.sbd.js') }}"></script>
     @endsection

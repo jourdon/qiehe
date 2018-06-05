@@ -8,6 +8,7 @@ class ReplyRequest extends Request
     {
         return [
             'body' => 'required|min:2',
+            'email'   =>  'nullable|email'
         ];
 
     }
@@ -17,6 +18,7 @@ class ReplyRequest extends Request
         return [
             'body.required' => '内容不能为空',
             'body.min' => '内容不能少于两个字',
+            'email.email' => 'Email格式不正确。',
         ];
     }
 }

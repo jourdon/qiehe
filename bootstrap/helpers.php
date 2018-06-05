@@ -66,3 +66,21 @@ function validateUsername($username)
 {
     return preg_match('/^[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\xff-\xff]*$/',$username);
 }
+function matchAt($reply,$body){
+    $userModel=new \App\Models\User();
+    preg_match_all("/@.*?(?=( |$))/",$body,$matched_name);
+    foreach($matched_name[0] as $key=> $name) {
+        $name=substr($name,1);
+        $user_id  =$userModel->where('name','like binary',$name)->value('id');
+        if(!$user_id) {
+            continue;
+        }
+        $reply_user_id[$key]=$user_id;
+        $body=str_replace('@'.$name,'[@'.$name.']('.config('app.url').'/users/'.$reply_user_id[$key].')',$body);
+        $userModel->getAtCached($name,$reply->user->id);
+    }
+    return [
+        'body'  => $body,
+        'reply_user_id' =>  $reply_user_id
+    ];
+}

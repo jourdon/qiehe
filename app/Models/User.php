@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Traits\HasRoles;
+use Cache;
 
 class User extends Authenticatable
 {
@@ -71,5 +72,17 @@ class User extends Authenticatable
         }
 
         $this->attributes['avatar'] = $path;
+    }
+
+    public function getAtCached($name,$user_id)
+    {
+        $cache_key = $user_id.'_userJson';
+        $users=Cache::get($cache_key);
+
+        if(!$users || !in_array($name,$users)) {
+            $users[] = $name;
+        }
+        Cache::put($cache_key,$users,now()->addWeeks(1));
+        return $users;
     }
 }

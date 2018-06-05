@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Handlers\ImageUploadHandler;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
-
+use Illuminate\Http\Request;
 class UsersController extends Controller
 {
     public function __construct()
@@ -36,5 +36,22 @@ class UsersController extends Controller
         if($user->status==0) $data['status']=1;
         $user->update($data);
         return redirect()->route('users.show',$user->id)->with('success','个人资料更新成功');
+    }
+
+    public function usersJson()
+    {
+        $cache_key = \Auth::id().'_userJson';
+        $users=\Cache::get($cache_key);
+        return response()->json($users);
+    }
+
+    public function cacheAt(Request $request)
+    {
+        if(!$request->name) {
+            return false;
+        }
+        $users=\Auth::user()->getAtCached($request->name,\Auth::id());
+
+        return ['msg'=>'缓存成功','data'=>$users];
     }
 }
