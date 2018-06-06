@@ -29,8 +29,11 @@ class PostReplied extends Notification implements ShouldQueue
     {
         $url =$this->reply->post->link(['#reply'.$this->reply->id]);
         return (new MailMessage)
-                    ->line('你的文章有新回复！')
-                    ->action('查看回复', $url);
+                ->subject($this->reply->user->name.'评论了您的文章')
+                    ->line($this->reply->user->name."评论了您的文章:")
+                    ->action($this->reply->post->title, $url)
+                    ->line("评论内容如下: ")
+                    ->line($this->reply->body);
     }
 
     public function toDatabase($notifiable)
