@@ -360,7 +360,7 @@ class Factory
      */
     public function getEditFields($loadRelationships = true, $override = false)
     {
-        if (!sizeof($this->editFields) || $override) {
+        if (!is_array($this->editFields) || !sizeof($this->editFields) || $override) {
             $this->editFields = array();
 
             //iterate over each supplied edit field
