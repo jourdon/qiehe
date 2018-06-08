@@ -21,7 +21,7 @@ class SidebarViewComposer
 
     public function compose(View $view)
     {
-        $new_replies = $this->reply->with('user','post')->latest()->take(5)->get();
+        $new_replies = $this->reply->with('user','post')->latest()->take(10)->get();
         $hots = $this->post->orderBy('top','desc')->orderBy('view_count','desc')->limit(10)->get();
         $links = $this->link->getAllCached();
         $tags=Tag::all();

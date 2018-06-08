@@ -16,8 +16,9 @@ class PostObserver
         //$post->title = clean($post->title,'user_post_body');
         //$post->body = clean($post->body,'user_post_body');
         //生成帖子摘要
-        $post->excerpt = make_excerpt($post->body);
-
+        if(!$post->excerpt){
+            $post->excerpt = make_excerpt($post->body);
+        }
     }
     public function saved(Post $post)
     {
