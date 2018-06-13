@@ -53,9 +53,26 @@ $('#reply-body').on("inserted.atwho", function(event, $li, browser_event) {
         }
     });
 });
+
 function OnInput(event){
     $('#preview-box').show();
     var converter = new showdown.Converter();
     var html = converter.makeHtml(event.target.value);
     $("#preview-box").html(html);
+}
+
+function replyOne(username){
+    replyContent = $("#reply-body");
+    oldContent = replyContent.val();
+    prefix = "@" + username + " ";
+    newContent = ''
+    if(oldContent.length > 0){
+        if (oldContent != prefix) {
+            newContent = oldContent + "\n" + prefix;
+        }
+    } else {
+        newContent = prefix
+    }
+    replyContent.focus();
+    replyContent.val(newContent);
 }

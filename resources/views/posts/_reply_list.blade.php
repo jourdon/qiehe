@@ -13,18 +13,23 @@
                     <span> •  </span>
                     <span class="meta" title="{{ $reply->created_at }}">{{ $reply->created_at->diffForHumans() }}</span>
 
-                    {{-- 回复删除按钮 --}}
-                    @can('destroy',$reply)
-                    <span class="meta float-right footer-grap">
+
+                    <span class="meta float-right footer-grap form-inline">
+                        <a role="button" class="btn btn-default btn-xs" href="javascript:;" onclick="replyOne('{{ $reply->user->name }}')" title="回复 {{ $reply->user->name }}">
+                                <i class="fa fa-reply"></i>
+                            </a>
+                        {{-- 回复删除按钮 --}}
+                        @can('destroy',$reply)
                         <form action="{{ route('replies.destroy', $reply->id) }}" method="post">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
-                            <button type="submit" class="btn btn-default btn-xs pull-left">
+                            <button type="submit" class="btn btn-default btn-xs">
                                 <i class="far fa-trash-alt"></i>
                             </button>
                         </form>
-                    </span>
                         @endcan
+                    </span>
+
                  </h5>
                 <p>
                     {!! clean(ParsedownExtra::instance()->text($reply->body),'user_post_body') !!}

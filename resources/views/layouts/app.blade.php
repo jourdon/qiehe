@@ -39,7 +39,9 @@
 @endif
 
 <!-- Scripts -->
+
 <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/prism.js') }}"></script>
 @yield('scripts')
 <script>
     var _hmt = _hmt || [];

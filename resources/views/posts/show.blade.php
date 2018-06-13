@@ -147,8 +147,8 @@
             {{-- 用户回复列表 --}}
             <div class="card">
                 <div class="card-body">
-                    @include('posts._reply_box', ['post' => $post])
                     @include('posts._reply_list', ['replies' => $post->replies()->with('user')->get()])
+                    @include('posts._reply_box', ['post' => $post])
                 </div>
             </div>
         </div>
