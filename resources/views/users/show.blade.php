@@ -42,7 +42,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="card-body card-font">
+                <div class="card-body card-font " style="padding-top: 0px;">
                     @if (if_query('tab', 'replies'))
                         @include('users._replies', ['replies' => $user->replies()->with('post')->orderBy('updated_at','desc')->paginate(5)])
                     @else
