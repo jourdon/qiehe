@@ -10,17 +10,17 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Support\Facades\Notification;
-use Auth;
 
 class NotifySomeone implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected  $reply;
-    public function __construct(Reply $reply)
+    protected $user_id;
+    public function __construct(Reply $reply,$user_id)
     {
         $this->reply = $reply;
+        $this->user_id = $user_id;
     }
 
     public function handle()
@@ -48,11 +48,11 @@ class NotifySomeone implements ShouldQueue
         $users=User::find($user_ids);
 
         $users->each(function($item,$key){
-            $item->notify(new PostReplied($this->reply));
+            $item->notify(new PostReplied($this->reply),$this->user_id);
         });
 
         //通知作者
-        $this->reply->post->user->notify(new PostReplied($this->reply,true));
+        $this->reply->post->user->notify(new PostReplied($this->reply,true),$this->user_id);
 
     }
 }
