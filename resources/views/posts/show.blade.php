@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $post->title)
+@section('title', $post->title.' - 茄盒网')
 @section('description', $post->excerpt)
 
 @section('style')

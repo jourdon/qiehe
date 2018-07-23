@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', isset($category)?$category->name:'博文列表')
+@section('title', isset($category)?$category->name.' - 茄盒网git ':null)
 
 @section('content')
 
