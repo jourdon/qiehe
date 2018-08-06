@@ -124,6 +124,15 @@
                         <p>
                             {!! clean(ParsedownExtra::instance()->text($post->body),'user_post_body') !!}
                         </p>
+                        <blockquote>
+                            <p>作者: <a href="{{ url('/') }}"> {{$post->user->name}}</a></p>
+                            <p>本文地址: <a href="{{request()->url()}}l">{{\request()->url()}}</a></p>
+                            <p>转载请注明出处！</p>
+                        </blockquote>
+                        <p class="text-center">
+                            <b>如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作！</b>
+                            <img src="{{ asset('images/zanshang.png') }}" alt="赞赏码" title="如果觉得我的文章对您有用，请随意打赏。你的支持将鼓励我继续创作！" width="300px">
+                        </p>
                     </div>
                 </div>
                     @can('update',$post)
