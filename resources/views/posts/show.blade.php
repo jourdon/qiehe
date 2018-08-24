@@ -91,7 +91,7 @@
                 @endif
                 <div class="card-header">
                     <div class="float-left title-left">
-                        <i class="fas fa-bars text-grep"></i> <a href="{{ route('categories.show', $post->category->id) }}" class="card-link" title="{{ $post->category->name }}">{{ $post->category->name }}</a>
+                        <i class="fas fa-bars text-grep"></i> <a href="{{ route('categories.show', $post->category->id) }}" class="card-link" title="{{ $post->category->title }}">{{ $post->category->title }}</a>
                         <span class="text-grap">   /  {{ $post->updated_at->diffForHumans() }}</span>
                         <h2 class="card-title" style="padding-top: 10px">
                             {{ $post->title }}

@@ -47,7 +47,7 @@ return [
             'sortable' => false,
             'output'   => function ($value, $model) {
                 $model->with('category');
-                return model_admin_link($model->category->name, $model->category);
+                return model_admin_link($model->category->title, $model->category);
             },
         ],
         'view_count' => [

@@ -10,7 +10,7 @@ class Category extends Model
 {
     use CategorySlug;
     protected $fillable= [
-        'name','description',
+        'title','description',
     ];
     public $cache_key = 'blog_categories';
     protected $cache_expire_in_minutes = 1440;

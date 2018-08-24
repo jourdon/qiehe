@@ -20,7 +20,7 @@ return [
         'id' => [
             'title' => 'ID',
         ],
-        'name' => [
+        'title' => [
             'title'    => '名称',
             'sortable' => false,
         ],
@@ -38,7 +38,7 @@ return [
         ],
     ],
     'edit_fields' => [
-        'name' => [
+        'title' => [
             'title' => '名称',
         ],
         'slug' => [
@@ -53,7 +53,7 @@ return [
         'id' => [
             'title' => '分类 ID',
         ],
-        'name' => [
+        'title' => [
             'title' => '名称',
         ],
         'description' => [
@@ -61,10 +61,10 @@ return [
         ],
     ],
     'rules'   => [
-        'name' => 'required|min:1|unique:categories'
+        'title' => 'required|min:1|unique:categories'
     ],
     'messages' => [
-        'name.unique'   => '分类名在数据库里有重复，请选用其他名称。',
-        'name.required' => '请确保名字至少一个字符以上',
+        'title.unique'   => '分类名在数据库里有重复，请选用其他名称。',
+        'title.required' => '请确保名字至少一个字符以上',
     ],
 ];

@@ -16,23 +16,23 @@ class SeedCategoriesData extends Migration
     {
         $categories = [
             [
-                'name'        => 'PHP',
+                'title'        => 'PHP',
                 'description' => '这是最好的言，谁有意见',
             ],
             [
-                'name'        => '前端',
+                'title'        => '前端',
                 'description' => '作为一个后端，前端知识也是要了解一下滴',
             ],
             [
-                'name'        => 'Linux',
+                'title'        => 'Linux',
                 'description' => '服务器不懂可不行哦',
             ],
             [
-                'name'        => 'Other',
+                'title'        => 'Other',
                 'description' => '其它分类的技术都在这里',
             ],
             [
-                'name'        => '技术之外',
+                'title'        => '技术之外',
                 'description' => '除了技术还是要有点其它东西的',
             ],
         ];

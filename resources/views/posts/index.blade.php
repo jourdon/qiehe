@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', isset($category)?$category->name.' - 茄盒网git ':null)
+@section('title', isset($category)?$category->title.' - 茄盒网git ':null)
 
 @section('content')
 
@@ -9,7 +9,7 @@
             @if (isset($category) )
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">{{ $category->name }} </a></li>
+                        <li class="breadcrumb-item"><a href="#">{{ $category->title }} </a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{ $category->description }}</li>
                     </ol>
                 </nav>

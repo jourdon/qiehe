@@ -8,6 +8,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Jourdon\Slug\Slug;
 
 class TranslateSlug implements ShouldQueue
 {
@@ -23,8 +24,8 @@ class TranslateSlug implements ShouldQueue
 
     public function handle()
     {
-        //请求百度 API 接口进行翻译
-        $slug = app(SlugTranslateHandler::class)->translate($this->model->title);
+        //请求 Slug 接口进行翻译
+        $slug = Slug::translate($this->model->title);
         //为了避免模型监控器死循环调用
         $this->model->where('id',$this->model->id)->update(['slug'=>$slug]);
     }
