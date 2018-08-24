@@ -24,6 +24,10 @@ return [
             'title'    => '名称',
             'sortable' => false,
         ],
+        'slug' => [
+            'title'    => 'Slug',
+            'sortable' => false,
+        ],
         'description' => [
             'title'    => '描述',
             'sortable' => false,
@@ -36,6 +40,9 @@ return [
     'edit_fields' => [
         'name' => [
             'title' => '名称',
+        ],
+        'slug' => [
+            'title' => 'Slug',
         ],
         'description' => [
             'title' => '描述',

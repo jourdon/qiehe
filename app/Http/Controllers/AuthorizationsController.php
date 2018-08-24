@@ -37,6 +37,7 @@ class AuthorizationsController extends Controller
                     ]);
                     event(new Registered($user));
                 }
+                break;
         }
         Auth::guard()->login($user);
         return redirect($user->email?'/':url('users/'.$user->id.'/edit'));
