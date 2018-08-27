@@ -2,13 +2,12 @@
 
 namespace App\Models;
 
-use App\Models\Traits\CategorySlug;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Traits\TitleSlug;
 use Cache;
 
 class Category extends Model
 {
-    use CategorySlug;
+    use TitleSlug;
     protected $fillable= [
         'title','description',
     ];
@@ -23,12 +22,8 @@ class Category extends Model
             return $this->all();
         });
     }
-    public function categorySlugCache()
+    public function SlugCache()
     {
-        $expire_id = $this->cache_expire_in_minutes;
-        $categories = self::all();
-        $categories->filter(function($category) use ($expire_id){
-            Cache::put('Category_'.$category->slug,$category->id,$expire_id);
-        });
+        $this->modelSlugCache($this);
     }
 }

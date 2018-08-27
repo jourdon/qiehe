@@ -10,7 +10,7 @@
             @endif
                 <div class="card-body" style="padding-bottom: 0px" >
                     <div class="float-left">
-                        <i class="fas fa-bars text-grep"></i> <a href="{{ route('categories.show', $post->category->id) }}" class="card-link" title="{{ $post->category->title }}">{{ $post->category->title }}</a>
+                        <i class="fas fa-bars text-grep"></i> <a href="{{ route('categories.show', $post->category) }}" class="card-link" title="{{ $post->category->title }}">{{ $post->category->title }}</a>
                         <span class="text-grap">   /  {{ $post->updated_at->diffForHumans() }}</span>
                     </div>
                     <div class="float-right">
@@ -18,13 +18,13 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title text-center"><a href="{{ $post->link() }}">{{ $post->title }}</a></h5>
+                    <h5 class="card-title text-center"><a href="{{ route('posts.show',$post) }}">{{ $post->title }}</a></h5>
                     <p class="card-text text-grap">
                         {{ $post->excerpt }}
                     </p>
                 </div>
                 <div class="card-body text-center">
-                    <a class="text-grap " href="{{ $post->link() }}"><i class="fas fa-hand-point-right"></i>  阅读更多&hellip;</a>
+                    <a class="text-grap " href="{{ route('posts.show',$post) }}"><i class="fas fa-hand-point-right"></i>  阅读更多&hellip;</a>
                     <div class="float-right ">
                         <i class="fas fa-tags"></i>
                         @if(count($post->tags))

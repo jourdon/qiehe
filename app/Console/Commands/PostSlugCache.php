@@ -2,15 +2,15 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Category;
+use App\Models\Post;
 use Illuminate\Console\Command;
 
-class CategorySlugCache extends Command
+class PostSlugCache extends Command
 {
 
-    protected $signature = 'qiehe:category-slug-cache';
+    protected $signature = 'qiehe:post-slug-cache';
 
-    protected $description = '分类Slug生成缓存';
+    protected $description = '文章Slug生成缓存';
 
 
     public function __construct()
@@ -18,7 +18,7 @@ class CategorySlugCache extends Command
         parent::__construct();
     }
 
-    public function handle(Category $model)
+    public function handle(Post $model)
     {
         // 在命令行打印一行信息
         $this->info("开始生成缓存...");

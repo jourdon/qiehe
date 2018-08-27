@@ -126,7 +126,7 @@
                         </p>
                         <blockquote>
                             <p>作者: <a href="{{ url('/') }}"> {{$post->user->name}}</a></p>
-                            <p>本文地址: <a href="{{request()->url()}}l">{{\request()->url()}}</a></p>
+                            <p>本文地址: <a href="{{request()->url()}}">{{\request()->url()}}</a></p>
                             <p>转载请注明出处！</p>
                         </blockquote>
                         <p class="text-center">

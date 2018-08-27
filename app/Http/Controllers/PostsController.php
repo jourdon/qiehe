@@ -31,9 +31,9 @@ class PostsController extends Controller
 
     public function show(Request $request,Post $post)
     {
+        $str=trim(strrchr($request->getPathInfo(), '/'),'/');
         event(new BlogView($post));
-        // URL 矫正
-        if ( ! empty($post->slug) && $post->slug != $request->slug) {
+        if ( !empty($post->slug) && is_numeric($str)) {
             return redirect($post->link(), 301);
         }
         return view('posts.show', compact('post'));
